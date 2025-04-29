@@ -1,0 +1,29 @@
+{
+  "family": "media-resizing-frontend",
+  "networkMode": "awsvpc",
+  "executionRoleArn": "arn:aws:iam::724412576445:role/ecsTaskExecutionRole",
+  "containerDefinitions": [
+    {
+      "name": "frontend-container",
+      "image": "724412576445.dkr.ecr.eu-north-1.amazonaws.com/media-resizing-frontend:latest",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 80,
+          "protocol": "tcp"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/media-resizing-frontend",
+          "awslogs-region": "eu-north-1",
+          "awslogs-stream-prefix": "frontend"
+        }
+      }
+    }
+  ],
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "512",
+  "memory": "1024"
+}
