@@ -1,4 +1,4 @@
-const API_URL = 'https://puz6atbo90.execute-api.eu-north-1.amazonaws.com/prod';
+const API_URL = 'your-api-url-here'; // Replace with your actual API URL
 
 export const processImage = async (imageKey, size) => {
     try {
