@@ -1,4 +1,4 @@
-const API_URL = 'your-api-url-here'; // Replace with your actual API URL
+const API_URL = process.env.REACT_APP_API_URL; // Replace with your actual API URL
 
 export const processImage = async (imageKey, size) => {
     try {
