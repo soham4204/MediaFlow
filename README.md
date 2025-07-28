@@ -1,70 +1,79 @@
-# Getting Started with Create React App
+# MEDIAFLOW - 🚀 Serverless Media Processing Pipeline on AWS
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project demonstrates a highly scalable, event-driven media processing pipeline using various AWS services. It supports file uploads, asynchronous processing, and real-time notifications.
 
-## Available Scripts
+## 📌 Architecture Overview
 
-In the project directory, you can run:
+The architecture is divided into the following key layers:
 
-### `npm start`
+### 1. *User Layer*
+- *Client:* Any user-facing application or frontend.
+- *API Gateway:* Handles HTTP requests from users.
+- *Authentication Service:* Verifies users before allowing access to upload or process data.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 2. *Storage Layer*
+- *S3 Bucket:* Stores uploaded media files.
+- *CloudFront (CDN):* Delivers static content like images or processed files quickly to end users.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 3. *Process Layer*
+- *SQS Queue:* Decouples file upload and processing using a message queue.
+- *ECS Cluster (Fargate or EC2):* Hosts microservices (e.g., Docker containers) to process uploaded media files.
+- *AWS Lambda:* Used for lightweight, serverless executions like image resizing, metadata extraction, or sending alerts.
+- *Database (e.g., RDS or DynamoDB):* Stores processed file data, metadata, or user information.
+- *Notification Service:* Sends processing status updates to users (e.g., via email, SMS, or push notifications).
 
-### `npm test`
+### 4. *Monitoring Layer*
+- *CloudWatch:* Monitors logs, metrics, and events.
+- *Auto Scaling:* Dynamically adjusts ECS instances based on workload.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🧱 AWS Services Used
 
-### `npm run build`
+| Service       | Purpose                                                             |
+|---------------|---------------------------------------------------------------------|
+| S3            | File storage                                                        |
+| SQS           | Message queue for asynchronous processing                           |
+| ECS           | Container orchestration for microservices                           |
+| Lambda        | Serverless functions for quick tasks like image processing          |
+| CloudFront    | CDN for fast content delivery                                       |
+| CloudWatch    | Monitoring and metrics                                              |
+| API Gateway   | Routing and request handling                                        |
+| RDS/DynamoDB  | Structured/NoSQL database for storing metadata                      |
+| SNS/SES/SQS   | Sending notifications                                               |
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+🔧 Setup Instructions
+## Clone this repo
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+git clone https://github.com/yourusername/aws-media-pipeline.git
+cd aws-media-pipeline
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Deploy Infrastructure
+Use Terraform, AWS CDK, or CloudFormation from the infrastructure/ folder.
 
-### `npm run eject`
+## Deploy ECS Services
+Containerize your processing service using Docker and deploy to ECS using Fargate or EC2 launch type.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Deploy Lambda Functions
+Upload or deploy using the AWS CLI or the Serverless Framework.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Configure S3 Event Trigger
+Set up S3 to trigger SQS when a new file is uploaded.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Set Up API Gateway and Auth
+Use Amazon Cognito or custom JWT-based auth for API protection.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Use Cases
+### 1. Media processing (images, videos, audio)
+### 2. Scalable content delivery
+### 3. Asynchronous file processing
+### 4. Real-time user notifications
 
-## Learn More
+### 📈 Scalability and Monitoring
+CloudWatch tracks ECS/Lambda metrics, request logs, and errors.
+Auto Scaling ensures services scale based on demand.
+SQS decouples components for improved reliability.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 📸 Diagram
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+![architecture](https://github.com/user-attachments/assets/f0c8e07e-a709-4e88-9e3e-386e4bf02239)
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Complete Documentation - [CCL Report.pdf](https://github.com/user-attachments/files/21472106/CCL.Report.pdf)
