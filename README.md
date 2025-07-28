@@ -74,6 +74,6 @@ SQS decouples components for improved reliability.
 
 ### 📸 Diagram
 
-![architecture](https://github.com/user-attachments/assets/f0c8e07e-a709-4e88-9e3e-386e4bf02239)
+![architecture](https://github.com/user-attachments/assets/db3adb74-66d3-40cd-ad5f-febf8f411092)
 
 ### Complete Documentation - [CCL Report.pdf](https://github.com/user-attachments/files/21472106/CCL.Report.pdf)
